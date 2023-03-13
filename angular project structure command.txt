@@ -1,0 +1,128 @@
+
+step-1
+
+ng New NooteBokes 
+routing -Y
+Scss 
+ng serve -o
+step-3
+
+ng g c AdminLayout --skipTests
+ng g c AuthLayout --skipTests
+ng g c register --skipTests
+ng g c login --skipTests
+ng g c register --skipTests
+ng g c MenuList --skipTests
+ng g c Dashboard --skipTests
+ng g m config --routing
+ ng g m config/todo-items --routing
+	ng g c config/todo-items/todo-item --skipTests
+		ng g c config/todo-items/todo-item/todo-item-form --skipTests
+
+step-4		
+		
+app-routing.module.ts----------
+
+import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
+import { AuthLayoutComponent } from './auth-layout/auth-layout.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginComponent } from './login/login.component';
+
+
+
+const routes: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  {
+    path: '',
+    component: AdminLayoutComponent,
+    children: [
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+        //canActivate: [AuthGuard],
+        data: { title: 'Dashboard', titleI18n: 'dashboard' },
+      },
+      {
+        path: 'config',
+        loadChildren: () =>
+          import('./config/config.module').then((m) => m.ConfigModule),
+        //canActivate: [AuthGuard],
+        // canLoad: [RandomGuard],
+        // canActivate: [AuthGuard],
+        data: { title: 'Config', titleI18n: 'config' },
+      },
+    ],
+  },
+
+  {
+    path: 'login',
+    component: AuthLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: LoginComponent,
+        data: { title: 'Login', titleI18n: 'Login' },
+      },
+    ],
+  },
+  { path: '**', redirectTo: 'login' },
+];
+
+
+
+step-5
+
+app.component.html-------->
+<router-outlet></router-outlet>
+auth-layout.component.html
+<router-outlet></router-outlet>
+step -6
+
+Install Angular Material
+then import ---app.module.ts------->
+
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+
+
+    FlexLayoutModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatListModule,
+    MatInputModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+	MatMenuModule
+	
+	npm install --save @angular/flex-layout@8.0.0-beta.27
+	
+	
+	
+	step-6
+	
+	ng g class models/Navitem --type=model --skipTests
+	ng g class models/Menu --type=model --skipTests
+
+
+step -7 
+ ng g s services/nav --skip-tests
+ 
+ npm install @auth0/angular-jwt
+ npm i ngx-toastr@^10.0.4
+ Update the angular.json file. Make sure you update the styles section under the build section with the following code
+
+"styles": [
+              "src/styles.css",
+              "node_modules/ngx-toastr/toastr.css"
+            ],

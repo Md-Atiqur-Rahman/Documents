@@ -1,0 +1,24 @@
+
+
+
+
+
+-------Folder Structure CLI Mode--------
+
+dotnet new sln
+dotnet new classlib -o src/MyLib
+
+dotnet new xunit -o tests/MyUnitTests
+
+dotnet sln add .\src\MyLib\
+dotnet sln add .\tests\MyUnitTests\
+
+-----------creating a new Project -------------
+
+dotnet new webapi -n Mongo.Migration
+
+cd Mongo.Migration
+
+dotnet build
+
+dotnet run
